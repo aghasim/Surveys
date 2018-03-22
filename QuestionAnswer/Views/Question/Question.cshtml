@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "QUESTIONS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<QuestionAnswer.Models.QuestionViewModel>
+
+<link href="~/Content/Question.css" rel="stylesheet" />
+<div class="col-xs-12 col-md-8 col-md-offset-2  divMargins">
+    <h2>@ViewBag.Survey.SurveyTitle</h2>
+    <hr />
+    @using (Html.BeginForm("Question", "Question", FormMethod.Post,new { @id="form1",@name="formName"}))
+    {
+        int tabIndex = 1;
+        foreach (var item in Model)
+        {
+            if (item.AnswerTypeText == "Multiple Choise")
+            {
+                <div class="form-group">
+                    <h3>@item.QuestionText</h3>
+                    <h6>(you can select multiple answers)</h6>
+                    <div>
+                        @foreach (var va in item.VariantsOfAnswersViewModel)
+                        {
+                            <ul class="nav">
+                                <li>
+                                    <input type="checkbox"  name="multiple" onfocus="this.focused = true;" onblur="this.focused = false;" tabindex="@tabIndex" id="@tabIndex" value="@ViewBag.Survey.SurveyTypeId, @item.SurveyId,@item.QuestionId, @item.AnswerTypeId, @va.Id, @va.AnswerText" />
+                                    <label for="@va.Id">@va.AnswerText</label>
+                                </li>
+                            </ul>
+                            tabIndex++;
+                        }
+                    </div>
+                </div>
+                <hr />
+            }
+
+            if (item.AnswerTypeText == "Only Choise")
+            {
+                <div>
+                    <h3>@item.QuestionText</h3>
+                    <h6>(you can select only answer)</h6>
+                    @foreach (var va in item.VariantsOfAnswersViewModel)
+                    {
+                        <ul class="nav">
+                            <li>
+                                <input type="radio" name="only" onfocus="this.focused = true;" onblur="this.focused = false;" tabindex="@tabIndex" id="@tabIndex" value="@ViewBag.Survey.SurveyTypeId,@item.SurveyId, @item.QuestionId, @item.AnswerTypeId, @va.Id, @va.AnswerText" />
+                                <label for="@va.Id">@va.AnswerText</label>
+                            </li>
+                        </ul>
+                        tabIndex++;
+                    }
+                </div>
+                <hr />
+            }
+
+            <div>
+                @if (item.AnswerTypeText == "Free Text")
+                {
+                    <h3>@item.QuestionText</h3>
+
+                    <input type="hidden" name="freeIds" value="@ViewBag.Survey.SurveyTypeId,@item.SurveyId, @item.QuestionId, @item.AnswerTypeId, 0," />
+                    <input type="text" tabindex="@tabIndex" onfocus="this.focused = true;" onblur="this.focused = false;" name="free" id="@tabIndex" class="textBox" />
+                    <hr />
+                    tabIndex++;
+                }
+            </div>
+        }
+        <input type="submit" value="Save" tabindex="@tabIndex" id="@tabIndex" class="btn btn-default button" />
+    }
+</div>
+<script src="~/Scripts/TabIndexByArrowUpDown.js"></script>

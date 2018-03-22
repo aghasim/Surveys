@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "PERCENTAGE RELATION of RESPONSES";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<QuestionAnswer.Models.SurveyTypeViewModel>
+
+
+<link href="~/Content/Percentage.css" rel="stylesheet" />
+@*<h2>PERCENTAGE RELATION of RESPONSES</h2>*@
+<div class="text-center div">
+   @foreach (var item in Model)
+   {
+       var name = item.TypeName + ".png";
+       <img src="~/Images/@name" alt="@item.TypeName" />
+       <hr />
+   }
+
+</div>
+
+

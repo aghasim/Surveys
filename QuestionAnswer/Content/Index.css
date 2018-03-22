@@ -1,0 +1,23 @@
+﻿
+.divMargins{
+    margin-top:100px;
+}
+
+.dropdownIndex {
+    height: 40px;
+    width: 400px;
+   border-radius:5px;
+   border-style:groove
+}
+
+.inputs{
+    margin-top:30px;
+    margin-bottom:30px;
+}
+
+.button {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 150px;
+    
+}

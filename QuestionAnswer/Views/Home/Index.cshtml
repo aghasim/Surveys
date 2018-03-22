@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "SURVEYS";
+}
+
+@model IEnumerable<QuestionAnswer.Models.SurveyViewModel>
+
+<link href="~/Content/Index.css" rel="stylesheet"/>
+<div class="text-center divMargins">
+    <h3>SELECT SURVEY TYPE</h3>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post,  new { @class = "inputs", @id = "form1" }))
+    {
+        <div class="divWitdh">
+            @Html.DropDownList("SurveyId", Model.Select(item => new SelectListItem
+       {
+           Value = item.SurveyId.ToString(),
+           Text = item.SurveyTypeName + " - " + item.SurveyTitle,
+           Selected = "select" == item.SurveyId.ToString()
+       }), htmlAttributes: new { @class="dropdownIndex", @tabindex = "1",@id="1" })
+        </div>
+        <input type="submit" value="NEXT" tabindex="2" id="2" class="btn btn-default button" />
+    }
+</div>
+<script src="~/Scripts/TabIndexByArrowUpDown.js"></script>
