@@ -34,12 +34,7 @@ namespace QuestionAnswer.BLL.AutoMapper
             //.ForMember("IsChecked",voa=>voa.MapFrom(c=>c.));
 
             CreateMap<UsersAnswers, UsersAnswersDTO>()
-           .ForMember("SurveyTypeId", usa => usa.MapFrom(c => c.SurveyTypeId))
-           .ForMember("SurveyId", usa => usa.MapFrom(c => c.SurveyId))
-           .ForMember("QuestionId", usa => usa.MapFrom(c => c.QuestionId))
-           .ForMember("AnswerTypeId", usa => usa.MapFrom(c => c.AnswerTypeId))
-           .ForMember("VariantsOfAnswerId", usa => usa.MapFrom(c => c.VariantsOfAnswerId))
-           .ForMember("Answer", usa => usa.MapFrom(c => c.Answer));
+            .ReverseMap();
 
             CreateMap<UsersAnswersDTO, UsersAnswers>()
            .ForMember("SurveyTypeId", usa => usa.MapFrom(c => c.SurveyTypeId))
